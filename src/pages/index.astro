@@ -9,6 +9,7 @@ import LandingHeader from '../components/LandingHeader.astro';
 import ChargeSection from '../components/chargeSection.astro';
 import SectionModelx from '../components/SectionModelx.astro';
 
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
@@ -17,26 +18,18 @@ import SectionModelx from '../components/SectionModelx.astro';
 	<LandingHeader/> 
 	<main class="snap-y snap-mandatory relative w-full h-screen overflow-auto">
 	
-		<div class="snap-center">
-		<SectionHero/>
-	</div>
+		
+		
+		
 	
-	<div class="snap-center">
-		<ChargeSection/>
-	</div>
+	
 
-	<div class="snap-center">
-		<SectionModel3/>
-	</div>
 
-     
-
-	<div class="snap-center">
+    <div class="snap-center">
 		<SectionModelx/>
-	</div>
-	
 
-      
+
+	</div>
 		
 	</main>	
     
@@ -44,3 +37,41 @@ import SectionModelx from '../components/SectionModelx.astro';
 
 		
 </Layout>
+<script>
+	const slider = document.querySelector(".slider") as HTMLElement;
+	const slides = document.querySelectorAll(".slider img");
+	const prev = document.querySelector(".prev");
+	const next = document.querySelector(".next");
+	const dotsContainer = document.querySelector(".dots");
+
+	let index = 0;
+
+	// Crear puntos de navegación
+	slides.forEach((_, i) => {
+		const dot = document.createElement("span");
+		dot.classList.add("dot");
+		if (i === 0) dot.classList.add("active");
+		dot.addEventListener("click", () => moveToSlide(i));
+		dotsContainer.appendChild(dot);
+	});
+
+	const dots = document.querySelectorAll(".dot");
+
+	function updateDots() {
+		dots.forEach(dot => dot.classList.remove("active"));
+		dots[index].classList.add("active");
+	}
+
+	function moveToSlide(n) {
+		index = (n + slides.length) % slides.length;
+		if (slider) {
+			slider.style.transform = `translateX(${-index * 100}%)`;
+		}
+		updateDots();
+	}
+
+	prev.addEventListener("click", () => moveToSlide(index - 1));
+	next.addEventListener("click", () => moveToSlide(index + 1));
+
+	setInterval(() => moveToSlide(index + 1), 3000); // Cambio automático cada 3 segundos
+</script>

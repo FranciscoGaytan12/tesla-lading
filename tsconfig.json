@@ -3,5 +3,9 @@
   "theme": {
     "extend": {}
   },
-  "plugins": []
+  "compilerOptions": {
+    "plugins": [
+      { "name": "typescript-plugin-example" }
+    ]
+  }
 }

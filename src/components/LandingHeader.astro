@@ -1,21 +1,27 @@
 ---
 import Logo from "./Logo.astro";
+
+
 ---
 
 <header 
 id ="landing-header"
-class="py-4 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white">
+class="py-4 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white bg-blue-400" >
     <div class="flex flex-grow ">
-        <Logo/>  
+ 
+   
    
     </div>
-
+   
 
     <nav class="flex flex-grow ">
 
         <ul class="flex text-sm [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2 [&>li>a]:text-current">
     
             <li><a href="#">Vehiculos</a></li>
+            <li>
+              
+            </li>
     
             <li><a href="#">Energia</a></li>
     
@@ -40,25 +46,3 @@ class="py-4 px-10 flex items-center fixed top-0 w-full justify-between z-40 text
 
 </nav>
 </header>
-<script>
-    const headerEl = document.querySelector("#landing-header") as HTMLElement
-  
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px", // en cuanto se vea el elemento
-      threshold: 0.9, // porcentaje de visibilidad
-    }
-  
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const { isIntersecting } = entry
-        if (isIntersecting) {
-          const color = entry.target.getAttribute("data-header-color")
-          headerEl.style.color = color
-        }
-      })
-    }, observerOptions)
-  
-    const sectionElements = document.querySelectorAll(".landing-section")
-    sectionElements.forEach((section) => observer.observe(section))
-  </script>
